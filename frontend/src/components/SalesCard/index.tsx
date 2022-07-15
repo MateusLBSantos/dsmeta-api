@@ -17,12 +17,16 @@ function SalesCard() {
   const [sales, setSales] = useState<Sale[]>([]);
 
   useEffect(() => {
+    
+    const dmin = minDate.toISOString().slice(0,10);
+    const dmax = maxDate.toISOString().slice(0,10);
+
     axios
-      .get(`${BASE_URL}/sales?minDate=2021-11-01&maxDate=2021-12-31`)
+      .get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
       .then((response) => {
         setSales(response.data.content);
       });
-  }, []);
+  }, [minDate, maxDate]);
 
   return (
     <>
